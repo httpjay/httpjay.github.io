@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay Panchal — Software & ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --bg2: #0d1220;
+    --bg3: #111827;
+    --surface: #161e2e;
+    --surface2: #1c2535;
+    --border: rgba(99,120,180,0.15);
+    --border2: rgba(99,120,180,0.3);
+    --accent: #4f8ef7;
+    --accent2: #7eb8ff;
+    --accent-dim: rgba(79,142,247,0.12);
+    --accent-glow: rgba(79,142,247,0.06);
+    --teal: #2dd4bf;
+    --teal-dim: rgba(45,212,191,0.1);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.1);
+    --coral: #f97316;
+    --text: #e8edf5;
+    --text2: #8fa3c0;
+    --text3: #4d6080;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Instrument Sans', sans-serif;
+    --display: 'Syne', sans-serif;
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── GRID LINES ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,142,247,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,142,247,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8,12,20,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 7rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  h1 .dim { color: var(--text3); }
+
+  .hero-sub {
+    font-family: var(--sans);
+    font-size: 1.15rem;
+    color: var(--text2);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-blue { background: var(--accent-dim); color: var(--accent2); border: 1px solid rgba(79,142,247,0.2); }
+  .tag-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(45,212,191,0.2); }
+  .tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text2);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .stat-card:hover { border-color: var(--border2); }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 1.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline-item.current::before {
+    background: var(--teal);
+    box-shadow: 0 0 0 4px rgba(45,212,191,0.15);
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-role {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-list {
+    list-style: none;
+    margin-bottom: 1rem;
+  }
+
+  .exp-list li {
+    font-size: 0.9rem;
+    color: var(--text2);
+    padding: 0.2rem 0;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--surface);
+    color: var(--text3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--teal));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-4px);
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .icon-blue { background: var(--accent-dim); }
+  .icon-teal { background: var(--teal-dim); }
+  .icon-amber { background: var(--amber-dim); }
+
+  .project-title {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .project-subtitle {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--text2);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-highlight {
+    background: var(--accent-glow);
+    border: 1px solid rgba(79,142,247,0.15);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent2);
+    margin-bottom: 1rem;
+  }
+
+  /* ── AWARDS ── */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .award-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+
+  .award-card:hover { border-color: var(--amber); }
+
+  .award-medal {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+    min-width: 2rem;
+  }
+
+  .award-title {
+    font-family: var(--display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .award-desc {
+    font-size: 0.83rem;
+    color: var(--text2);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .award-prize {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--amber);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skill-group-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-item {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .skill-item:hover {
+    color: var(--text);
+    border-color: var(--border2);
+  }
+
+  /* ── EDUCATION ── */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .edu-card.current {
+    border-color: rgba(79,142,247,0.3);
+  }
+
+  .edu-card.current::after {
+    content: 'CURRENT';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--teal);
+    border: 1px solid rgba(45,212,191,0.3);
+    background: var(--teal-dim);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.08em;
+  }
+
+  .edu-degree {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+  }
+
+  .edu-field {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .edu-school {
+    font-size: 0.88rem;
+    color: var(--text2);
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-meta-item {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text3);
+    letter-spacing: 0.04em;
+  }
+
+  .edu-meta-item span { color: var(--text2); }
+
+  /* ── CONTACT ── */
+  #contact {
+    text-align: center;
+  }
+
+  .contact-desc {
+    font-size: 1.1rem;
+    color: var(--text2);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text2);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .contact-link:hover {
+    color: var(--accent2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links li:nth-child(n+4) { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Jay<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#experience">work</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-label animate">available for opportunities</div>
+  <h1 class="animate delay-1">Jay A<br><span class="dim">Panchal</span></h1>
+  <p class="hero-sub animate delay-2">
+    Software Engineer & MSCS student at LMU — building production backends, exploring machine learning, and diving deep into Generative AI.
+  </p>
+  <div class="hero-tags animate delay-3">
+    <span class="tag tag-blue">Software Engineering</span>
+    <span class="tag tag-teal">Machine Learning</span>
+    <span class="tag tag-amber">Generative AI</span>
+    <span class="tag tag-blue">Backend Development</span>
+    <span class="tag tag-teal">Deep Learning</span>
+  </div>
+  <div class="hero-actions animate delay-4">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a <strong>Software Engineer</strong> with 1.5+ years of industry experience building backend systems, RESTful APIs, and automation pipelines. Currently pursuing my <strong>MSCS at Loyola Marymount University</strong> (GPA 3.84), where I serve as a Teaching Assistant for Machine Learning.
+      </p>
+      <p>
+        My focus during my masters has shifted toward <strong>Machine Learning and Generative AI</strong> — I've worked on VAE and DCGAN architectures, NLP pipelines, and database performance benchmarking. I love sitting at the intersection of solid engineering and intelligent systems.
+      </p>
+      <p>
+        Outside of code, I've placed in LMU's Datathon and an Entrepreneurship Bootcamp — I enjoy the full arc from idea to shipped product.
+      </p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">1.5+</div>
+        <div class="stat-label">Years industry exp</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3.84</div>
+        <div class="stat-label">Masters GPA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Projects built</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2×</div>
+        <div class="stat-label">Competition awards</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item current">
+      <div class="exp-header">
+        <div class="exp-role">Teaching Assistant — Machine Learning</div>
+        <div class="exp-date">Fall 2025 – Present</div>
+      </div>
+      <div class="exp-company">Loyola Marymount University · CMSI 5350</div>
+      <ul class="exp-list">
+        <li>Graded assignments covering regression, classification, clustering, and neural networks</li>
+        <li>Assisted students in debugging Python ML implementations in lab sessions</li>
+        <li>Collaborated with instructor on grading criteria and concept clarification</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Python</span>
+        <span class="chip">Machine Learning</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Software Engineer</div>
+        <div class="exp-date">Jan 2023 – Aug 2024</div>
+      </div>
+      <div class="exp-company">Aequitas</div>
+      <ul class="exp-list">
+        <li>Developed backend and application-level features for production systems</li>
+        <li>Built automated test suites using Selenium, Postman, and Appium</li>
+        <li>Performed functional, regression, and performance testing</li>
+        <li>Worked with Jenkins CI/CD pipelines and optimized SQL queries and indexing strategies</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Java</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Jenkins</span>
+        <span class="chip">Selenium</span>
+        <span class="chip">Postman</span>
+        <span class="chip">Appium</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Backend Developer</div>
+        <div class="exp-date">Sep 2023 – Dec 2023</div>
+      </div>
+      <div class="exp-company">CodeHabbit</div>
+      <ul class="exp-list">
+        <li>Built RESTful APIs using Node.js (Express) and Java (Spring)</li>
+        <li>Implemented JWT authentication and role-based access control</li>
+        <li>Designed scalable APIs with pagination, filtering, and versioning</li>
+        <li>Designed MongoDB and MySQL schemas with query optimization</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Node.js</span>
+        <span class="chip">Express</span>
+        <span class="chip">Java</span>
+        <span class="chip">Spring</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">JWT</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Software Engineer Intern</div>
+        <div class="exp-date">Jan 2023 – Aug 2023</div>
+      </div>
+      <div class="exp-company">Praxware</div>
+      <ul class="exp-list">
+        <li>Developed backend features using Django and MySQL</li>
+        <li>Built sales and inventory backend workflows with CRUD operations</li>
+        <li>Built Power BI dashboards for business reporting</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Python</span>
+        <span class="chip">Django</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Power BI</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Software Engineer Intern</div>
+        <div class="exp-date">Jun 2022 – Jul 2022</div>
+      </div>
+      <div class="exp-company">HN Techno</div>
+      <ul class="exp-list">
+        <li>Developed full-stack web application using Angular and TypeScript</li>
+        <li>Built features for receipt management and inventory tracking</li>
+        <li>Implemented performance optimizations and improved application scalability</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Angular</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">JavaScript</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon icon-teal">🧬</div>
+      <div class="project-title">Pokémon Generator</div>
+      <div class="project-subtitle">Generative AI · Deep Learning</div>
+      <p class="project-desc">
+        Implemented and compared VAE and DCGAN architectures in PyTorch, trained on ~2,500 Pokémon images. Resolved GAN mode collapse using spectral normalization and label smoothing. Trained for 300 epochs on Apple Silicon MPS backend.
+      </p>
+      <div class="project-highlight">VAE stability vs DCGAN realism — demonstrated generative modeling trade-offs</div>
+      <div class="tech-chips">
+        <span class="chip">PyTorch</span>
+        <span class="chip">GAN</span>
+        <span class="chip">VAE</span>
+        <span class="chip">Deep Learning</span>
+        <span class="chip">Generative AI</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon icon-blue">🗄️</div>
+      <div class="project-title">atlas.db</div>
+      <div class="project-subtitle">Database Benchmarking · Analytics</div>
+      <p class="project-desc">
+        Benchmarked PostgreSQL vs MongoDB using ~622K LA traffic collision records. Built systems on Amazon RDS and MongoDB Atlas, connected to Power BI dashboards. Won Most Effective Presentation Delivery award.
+      </p>
+      <div class="project-highlight">PostgreSQL outperformed MongoDB in 4 out of 5 analytical queries</div>
+      <div class="tech-chips">
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">Python</span>
+        <span class="chip">Power BI</span>
+        <span class="chip">AWS RDS</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon icon-amber">🔍</div>
+      <div class="project-title">Fake Review Detection</div>
+      <div class="project-subtitle">NLP · Machine Learning</div>
+      <p class="project-desc">
+        Built an NLP classification pipeline using TF-IDF. Trained and evaluated multiple ML classifiers using precision, recall, F1-score, and ROC-AUC. Performed full EDA and dataset preprocessing.
+      </p>
+      <div class="tech-chips">
+        <span class="chip">Python</span>
+        <span class="chip">Scikit-learn</span>
+        <span class="chip">NLP</span>
+        <span class="chip">TF-IDF</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon icon-blue">🔒</div>
+      <div class="project-title">Secure Banking Vault</div>
+      <div class="project-subtitle">Web Security · Full Stack</div>
+      <p class="project-desc">
+        Built a secure banking web application with Flask and MySQL. Implemented bcrypt password hashing, MFA via pyotp, SQL injection protection, RBAC, and secure money transfer functionality.
+      </p>
+      <div class="tech-chips">
+        <span class="chip">Python</span>
+        <span class="chip">Flask</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">bcrypt</span>
+        <span class="chip">pyotp</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Awards</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-medal">3rd</div>
+      <div>
+        <div class="award-title">LMU BEST Entrepreneurship Bootcamp</div>
+        <div class="award-desc">Built an AI-powered dynamic travel itinerary app. Applied business model canvas and customer segmentation across a team of 4 competing against 7 teams.</div>
+        <div class="award-prize">$350 prize · January 2026</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-medal">3rd</div>
+      <div>
+        <div class="award-title">LMU Datathon</div>
+        <div class="award-desc">Analyzed the NLSY97 dataset to surface wage gap insights. Competed against universities across Southern California with statistical analysis and visualizations.</div>
+        <div class="award-prize">$1,000 prize · LMU</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-label">Languages</div>
+      <div class="skill-items">
+        <span class="skill-item">Python</span>
+        <span class="skill-item">Java</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">TypeScript</span>
+        <span class="skill-item">C++</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Backend</div>
+      <div class="skill-items">
+        <span class="skill-item">Node.js</span>
+        <span class="skill-item">Express</span>
+        <span class="skill-item">Spring Boot</span>
+        <span class="skill-item">Django</span>
+        <span class="skill-item">Flask</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Databases</div>
+      <div class="skill-items">
+        <span class="skill-item">MySQL</span>
+        <span class="skill-item">PostgreSQL</span>
+        <span class="skill-item">MongoDB</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Machine Learning</div>
+      <div class="skill-items">
+        <span class="skill-item">PyTorch</span>
+        <span class="skill-item">Scikit-learn</span>
+        <span class="skill-item">NLP</span>
+        <span class="skill-item">TF-IDF</span>
+        <span class="skill-item">GAN</span>
+        <span class="skill-item">VAE</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Tools</div>
+      <div class="skill-items">
+        <span class="skill-item">Git</span>
+        <span class="skill-item">Jenkins</span>
+        <span class="skill-item">Postman</span>
+        <span class="skill-item">Selenium</span>
+        <span class="skill-item">Appium</span>
+        <span class="skill-item">Power BI</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Concepts</div>
+      <div class="skill-items">
+        <span class="skill-item">REST APIs</span>
+        <span class="skill-item">CI/CD</span>
+        <span class="skill-item">RBAC</span>
+        <span class="skill-item">Auth</span>
+        <span class="skill-item">Web Security</span>
+        <span class="skill-item">Generative AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card current">
+      <div class="edu-degree">Master of Science in Computer Science</div>
+      <div class="edu-field">Focus: Machine Learning & Generative AI</div>
+      <div class="edu-school">Loyola Marymount University, Los Angeles</div>
+      <div class="edu-meta">
+        <div class="edu-meta-item">2024 – <span>Dec 2026</span></div>
+        <div class="edu-meta-item">GPA <span>3.84</span></div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Engineering in Computer Engineering</div>
+      <div class="edu-field">Gujarat Technological University</div>
+      <div class="edu-school">Gujarat, India</div>
+      <div class="edu-meta">
+        <div class="edu-meta-item">2019 – <span>2023</span></div>
+        <div class="edu-meta-item">CGPA <span>7.37</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header" style="justify-content:center; text-align:center;">
+    <span class="section-num">07</span>
+    <h2>Get in Touch</h2>
+  </div>
+  <p class="contact-desc">
+    Open to Software Engineer, Backend Engineer, and ML Engineer roles. Always happy to connect.
+  </p>
+  <div class="contact-links">
+    <a href="mailto:jpanchal@lion.lmu.edu" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      jpanchal@lion.lmu.edu
+    </a>
+    <a href="https://github.com/" target="_blank" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      GitHub
+    </a>
+    <a href="https://linkedin.com/" target="_blank" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+<footer>
+  designed & built by Jay A Panchal · 2025
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        e.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.project-card, .stat-card, .skill-group, .award-card, .edu-card, .timeline-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
