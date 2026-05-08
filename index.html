@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay Panchal — Software & ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #1a0a10;
+    --bg2:         #200c14;
+    --bg3:         #221016;
+    --surface:     #2a1018;
+    --surface2:    #301520;
+    --border:      rgba(192,80,106,0.2);
+    --border2:     rgba(192,80,106,0.42);
+    --accent:      #c0506a;
+    --accent2:     #f8c8d4;
+    --accent-dim:  rgba(192,80,106,0.12);
+    --accent-glow: rgba(192,80,106,0.07);
+    --text:        #f5e8ec;
+    --text2:       #b89098;
+    --text3:       #7a5060;
+    --mono:        'Courier New', monospace;
+    --sans:        'Inter', system-ui, sans-serif;
+    --display:     Georgia, 'Times New Roman', serif;
+    --radius:      10px;
+    --radius-lg:   16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.25;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26,10,16,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #hero-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: block;
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    transform: translateY(-50%);
+    max-width: 500px;
+    z-index: 2;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(100,50,70,0.65);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  #hero h1 {
+    font-family: var(--display);
+    font-size: 68px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    color: #3d2030;
+  }
+
+  #hero h1 .dim {
+    display: block;
+    color: #c0506a;
+  }
+
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(100,50,70,0.72);
+    max-width: 460px;
+    margin-bottom: 1.75rem;
+    line-height: 1.85;
+    letter-spacing: 1.5px;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.28rem 0.75rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-blue  { background: rgba(192,80,106,0.1);  color: #c0506a;  border: 1px solid rgba(192,80,106,0.25); }
+  .tag-teal  { background: rgba(248,200,212,0.1); color: #d4809a;  border: 1px solid rgba(248,200,212,0.2); }
+  .tag-amber { background: rgba(192,80,106,0.08); color: #b86880;  border: 1px solid rgba(192,80,106,0.2);  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 400;
+    padding: 0.65rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: transparent;
+    color: #c0506a;
+    border: 1px solid #c0506a;
+  }
+  .btn-primary:hover { background: rgba(192,80,106,0.13); }
+
+  .btn-ghost {
+    background: transparent;
+    color: rgba(100,50,70,0.75);
+    border: 1px solid rgba(192,80,106,0.3);
+  }
+  .btn-ghost:hover { color: #c0506a; border-color: #c0506a; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--text);
+  }
+
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item { position: relative; margin-bottom: 3rem; padding-left: 1.5rem; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem; top: 8px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline-item.current::before {
+    background: var(--accent2);
+    box-shadow: 0 0 0 4px rgba(248,200,212,0.15);
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-role {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent2);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-list { list-style: none; margin-bottom: 1rem; }
+
+  .exp-list li {
+    font-size: 0.88rem;
+    color: var(--text2);
+    padding: 0.2rem 0 0.2rem 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+
+  .tech-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--surface);
+    color: var(--text3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover { border-color: rgba(192,80,106,0.42); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .icon-blue  { background: var(--accent-dim); }
+  .icon-teal  { background: rgba(248,200,212,0.1); }
+  .icon-amber { background: rgba(192,80,106,0.08); }
+
+  .project-title {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .project-subtitle {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.65; margin-bottom: 1.25rem; }
+
+  .project-highlight {
+    background: var(--accent-glow);
+    border: 1px solid rgba(192,80,106,0.15);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent2);
+    margin-bottom: 1rem;
+  }
+
+  /* ── AWARDS ── */
+  .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+  .award-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .award-card:hover { border-color: var(--accent); }
+
+  .award-medal {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 2rem;
+  }
+
+  .award-title { font-family: var(--display); font-size: 0.95rem; font-weight: 400; color: var(--text); margin-bottom: 0.25rem; }
+  .award-desc  { font-size: 0.83rem; color: var(--text2); line-height: 1.5; margin-bottom: 0.5rem; }
+  .award-prize { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.04em; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .skill-group-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .skill-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .skill-item {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+  .skill-item:hover { color: var(--text); border-color: var(--accent); }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .edu-card.current { border-color: rgba(192,80,106,0.35); }
+
+  .edu-card.current::after { display: none; }
+
+  .edu-card.current .edu-degree::after {
+    content: 'current';
+    display: inline-block;
+    margin-left: 0.65rem;
+    vertical-align: middle;
+    background: rgba(192,80,106,0.15);
+    color: #c0506a;
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    border: 1px solid rgba(192,80,106,0.3);
+    border-radius: 2px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .edu-degree { font-family: var(--display); font-size: 1rem; font-weight: 400; color: var(--text); margin-bottom: 0.25rem; line-height: 1.3; }
+  .edu-field  { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); margin-bottom: 0.75rem; }
+  .edu-school { font-size: 0.88rem; color: var(--text2); margin-bottom: 0.5rem; }
+
+  .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .edu-meta-item { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); letter-spacing: 0.04em; }
+  .edu-meta-item span { color: var(--text2); }
+
+  /* ── CONTACT ── */
+  #contact { text-align: center; }
+
+  .contact-desc { font-size: 1rem; color: var(--text2); max-width: 480px; margin: 0 auto 2.5rem; }
+
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text2);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .contact-link:hover { color: var(--accent2); border-color: var(--accent); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,4,8,0.93);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+    backdrop-filter: blur(8px);
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    max-width: 860px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .modal-header {
+    padding: 2rem 2.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .modal-title { font-family: var(--display); font-size: 1.5rem; font-weight: 400; color: var(--text); margin-bottom: 0.25rem; }
+  .modal-subtitle { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.06em; }
+
+  .modal-close {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { border-color: var(--accent); color: var(--text); }
+
+  .modal-body { padding: 2rem 2.5rem; }
+  .modal-section { margin-bottom: 2rem; }
+
+  .modal-section-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .modal-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .modal-text { font-size: 0.92rem; color: var(--text2); line-height: 1.75; }
+  .modal-text strong { color: var(--text); font-weight: 500; }
+
+  .modal-img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 0.5rem; }
+
+  .modal-img-caption {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text3);
+    text-align: center;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.25rem;
+  }
+
+  .modal-img-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem; margin-bottom: 0.5rem; }
+  .modal-img-grid img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); }
+
+  .modal-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .modal-highlight-box {
+    background: var(--accent-glow);
+    border: 1px solid rgba(192,80,106,0.15);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+  .modal-highlight-box strong { color: var(--accent2); font-weight: 500; }
+
+  .modal-footer {
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── BACKGROUND PETAL CANVAS ── */
+  #bg-petals {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+  }
+
+  /* ── SECTION DIVIDERS ── */
+  .blossom-divider {
+    display: flex;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .blossom-divider::before,
+  .blossom-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(192,80,106,0.15);
+  }
+  .blossom-divider svg { margin: 0 1.25rem; flex-shrink: 0; opacity: 0.5; }
+
+  /* ── SKILLS DECORATIVE BRANCH ── */
+  .skills-branch {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    width: 110px;
+    height: 190px;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HOVER PETAL ── */
+  .hover-petal {
+    position: absolute;
+    width: 10px;
+    height: 7px;
+    background: rgba(248,200,212,0.82);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    animation: petalHover 0.8s ease-out forwards;
+  }
+  @keyframes petalHover {
+    0%   { opacity: 0.82; transform: translateY(0)    rotate(20deg) scale(1);    }
+    50%  { opacity: 0.55; transform: translateY(-16px) rotate(48deg) scale(0.85); }
+    100% { opacity: 0;    transform: translateY(-34px) rotate(78deg) scale(0.5);  }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links li:nth-child(n+4) { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    /* Hero text: centered in sky, clear of tree */
+    .hero-content {
+      left: 5%; right: 5%;
+      max-width: none;
+      top: 38%;
+    }
+    #hero h1    { font-size: 44px; }
+    .hero-sub   { font-size: 10px; letter-spacing: 1px; }
+    .tag        { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg-petals"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Jay<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#experience">work</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-label animate">available for opportunities</div>
+    <h1 class="animate delay-1">Jay A<br><span class="dim">Panchal</span></h1>
+    <p class="hero-sub animate delay-2">
+      Software Engineer &amp; MSCS student at LMU — building production backends, exploring machine learning, and diving deep into Generative AI.
+    </p>
+    <div class="hero-tags animate delay-3">
+      <span class="tag tag-blue">Software Engineering</span>
+      <span class="tag tag-blue">Machine Learning</span>
+      <span class="tag tag-blue">Generative AI</span>
+      <span class="tag tag-blue">Backend Development</span>
+      <span class="tag tag-blue">Deep Learning</span>
+    </div>
+    <div class="hero-actions animate delay-4">
+      <a href="#projects" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="blossom-divider" aria-hidden="true"><svg width="16" height="16" viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(0)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(72)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(144)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(216)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(288)"/><circle cx="0" cy="0" r="1.4" fill="#f8c8d4"/></svg></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a <strong>Software Engineer</strong> with 1.5+ years of industry experience building backend systems, RESTful APIs, and automation pipelines. Currently pursuing my <strong>MSCS at Loyola Marymount University</strong> (GPA 3.84), where I serve as a Teaching Assistant for Machine Learning.
+      </p>
+      <p>
+        My focus during my masters has shifted toward <strong>Machine Learning and Generative AI</strong> — I've worked on VAE and DCGAN architectures, NLP pipelines, and database performance benchmarking. I love sitting at the intersection of solid engineering and intelligent systems.
+      </p>
+      <p>
+        Outside of code, I've placed in LMU's Datathon and an Entrepreneurship Bootcamp — I enjoy the full arc from idea to shipped product.
+      </p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">1.5+</div>
+        <div class="stat-label">Years industry exp</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3.84</div>
+        <div class="stat-label">Masters GPA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Projects built</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2×</div>
+        <div class="stat-label">Competition awards</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="blossom-divider" aria-hidden="true"><svg width="16" height="16" viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(0)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(72)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(144)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(216)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(288)"/><circle cx="0" cy="0" r="1.4" fill="#f8c8d4"/></svg></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item current">
+      <div class="exp-header">
+        <div class="exp-role">Teaching Assistant — Machine Learning</div>
+        <div class="exp-date">Fall 2025 – Present</div>
+      </div>
+      <div class="exp-company">Loyola Marymount University · CMSI 5350</div>
+      <ul class="exp-list">
+        <li>Graded assignments covering regression, classification, clustering, and neural networks</li>
+        <li>Assisted students in debugging Python ML implementations in lab sessions</li>
+        <li>Collaborated with instructor on grading criteria and concept clarification</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Python</span>
+        <span class="chip">Machine Learning</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Software Engineer</div>
+        <div class="exp-date">Jan 2023 – Aug 2024</div>
+      </div>
+      <div class="exp-company">Aequitas</div>
+      <ul class="exp-list">
+        <li>Engineered backend features using Java Spring Boot and MySQL for a mandatory office management platform serving tens of thousands of ICAI-certified CA professionals across India, supporting project tracking, client management, team allocation, and task status workflows</li>
+        <li>Designed and optimized relational SQL schemas across multi-entity data (projects, clients, teams), improving reliability of complex cross-table lookups</li>
+        <li>Built automated test suites using Selenium, Postman, and Appium for functional, regression, and performance testing across release cycles</li>
+        <li>Maintained Jenkins CI/CD pipelines to coordinate iterative build and deployment processes</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Java</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Jenkins</span>
+        <span class="chip">Selenium</span>
+        <span class="chip">Postman</span>
+        <span class="chip">Appium</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Backend Developer</div>
+        <div class="exp-date">Sep 2023 – Dec 2023</div>
+      </div>
+      <div class="exp-company">CodeHabbit</div>
+      <ul class="exp-list">
+        <li>Built RESTful APIs using Node.js and Express for a hospital management system serving 25+ staff, covering patient records, staff scheduling, task assignments, and role-based data access</li>
+        <li>Implemented JWT authentication and RBAC to enforce access control across staff, admin, and patient-facing endpoints</li>
+        <li>Designed MongoDB and MySQL schemas with pagination, filtering, and versioning support, optimizing query performance for high-frequency read operations</li>
+        <li>Coordinated API contracts with frontend developers, delivering versioned and documented endpoints aligned with product requirements</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Node.js</span>
+        <span class="chip">Express</span>
+        <span class="chip">Java</span>
+        <span class="chip">Spring</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">JWT</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Software Engineer Intern</div>
+        <div class="exp-date">Jan 2023 – Aug 2023</div>
+      </div>
+      <div class="exp-company">Praxware</div>
+      <ul class="exp-list">
+        <li>Developed backend workflows using Django and MySQL for a sales and inventory management system, implementing CRUD operations for product tracking, stock management, and order processing</li>
+        <li>Built Power BI dashboards surfacing sales trends, inventory turnover, and fulfillment metrics for business stakeholder reporting</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Python</span>
+        <span class="chip">Django</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Power BI</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="exp-header">
+        <div class="exp-role">Software Engineer Intern</div>
+        <div class="exp-date">Jun 2022 – Jul 2022</div>
+      </div>
+      <div class="exp-company">HN Techno</div>
+      <ul class="exp-list">
+        <li>Developed an inventory management web application using Angular and TypeScript, implementing full CRUD operations for product tracking, receipt management, and stock updates</li>
+        <li>Applied OOP principles and modular component architecture for maintainability, with performance optimizations via efficient data binding and component reuse</li>
+      </ul>
+      <div class="tech-chips">
+        <span class="chip">Angular</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">JavaScript</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="blossom-divider" aria-hidden="true"><svg width="16" height="16" viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(0)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(72)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(144)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(216)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(288)"/><circle cx="0" cy="0" r="1.4" fill="#f8c8d4"/></svg></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon icon-teal">⚡</div>
+      <div class="project-title">GridWatch</div>
+      <div class="project-subtitle">Generative AI · RAG · XGBoost · SHAP · Streamlit</div>
+      <p class="project-desc">
+        AI-powered web app helping California residents find energy assistance programs they qualify for, while giving city officials a data-driven risk map of communities struggling with high electricity bills.
+      </p>
+      <div class="project-highlight">ML + SHAP + RAG + FAISS + LLM — end-to-end GenAI system across 50 CA cities</div>
+      <div class="tech-chips" style="margin-bottom:1rem;">
+        <span class="chip">Python</span>
+        <span class="chip">XGBoost</span>
+        <span class="chip">SHAP</span>
+        <span class="chip">RAG</span>
+        <span class="chip">FAISS</span>
+        <span class="chip">OpenAI API</span>
+        <span class="chip">Streamlit</span>
+      </div>
+      <button onclick="document.getElementById('modal-gridwatch').classList.add('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.1rem;background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(192,80,106,0.25);border-radius:6px;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;" onmouseover="this.style.background='rgba(192,80,106,0.2)'" onmouseout="this.style.background='var(--accent-dim)'">More Details →</button>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon icon-amber">🔍</div>
+      <div class="project-title">Fake Review Detection</div>
+      <div class="project-subtitle">NLP · Machine Learning</div>
+      <p class="project-desc">
+        Built an NLP classification pipeline using TF-IDF. Trained and evaluated multiple ML classifiers using precision, recall, F1-score, and ROC-AUC. Performed full EDA and dataset preprocessing.
+      </p>
+      <div class="project-highlight">Live demo deployed on Hugging Face Spaces</div>
+      <div class="tech-chips" style="margin-bottom:1rem;">
+        <span class="chip">Python</span>
+        <span class="chip">Scikit-learn</span>
+        <span class="chip">NLP</span>
+        <span class="chip">TF-IDF</span>
+      </div>
+      <button onclick="document.getElementById('modal-fakereview').classList.add('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.1rem;background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(192,80,106,0.25);border-radius:6px;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;" onmouseover="this.style.background='rgba(192,80,106,0.2)'" onmouseout="this.style.background='var(--accent-dim)'">More Details →</button>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon icon-teal">🧬</div>
+      <div class="project-title">Pokémon Generator</div>
+      <div class="project-subtitle">Generative AI · Deep Learning</div>
+      <p class="project-desc">
+        Implemented and compared VAE and DCGAN architectures in PyTorch, trained on ~2,500 Pokémon images. Resolved GAN mode collapse using spectral normalization and label smoothing. Trained for 300 epochs on Apple Silicon MPS backend.
+      </p>
+      <div class="project-highlight">VAE stability vs DCGAN realism — demonstrated generative modeling trade-offs</div>
+      <div class="tech-chips" style="margin-bottom:1rem;">
+        <span class="chip">PyTorch</span>
+        <span class="chip">GAN</span>
+        <span class="chip">VAE</span>
+        <span class="chip">Deep Learning</span>
+        <span class="chip">Generative AI</span>
+      </div>
+      <button onclick="document.getElementById('modal-pokemon').classList.add('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.1rem;background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(192,80,106,0.25);border-radius:6px;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;" onmouseover="this.style.background='rgba(192,80,106,0.2)'" onmouseout="this.style.background='var(--accent-dim)'">More Details →</button>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon icon-blue">🗄️</div>
+      <div class="project-title">atlas.db</div>
+      <div class="project-subtitle">Database Benchmarking · Analytics</div>
+      <p class="project-desc">
+        Benchmarked PostgreSQL vs MongoDB using ~622K LA traffic collision records. Built systems on Amazon RDS and MongoDB Atlas, connected to Power BI dashboards. Won Most Effective Presentation Delivery award.
+      </p>
+      <div class="project-highlight">PostgreSQL outperformed MongoDB in 4 out of 5 analytical queries</div>
+      <div class="tech-chips" style="margin-bottom:1rem;">
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">Python</span>
+        <span class="chip">Power BI</span>
+        <span class="chip">AWS RDS</span>
+      </div>
+      <button onclick="document.getElementById('modal-atlas').classList.add('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.1rem;background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(192,80,106,0.25);border-radius:6px;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;" onmouseover="this.style.background='rgba(192,80,106,0.2)'" onmouseout="this.style.background='var(--accent-dim)'">More Details →</button>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon icon-blue">🔒</div>
+      <div class="project-title">Secure Banking Vault</div>
+      <div class="project-subtitle">Web Security · Full Stack</div>
+      <p class="project-desc">
+        Built a secure banking web application with Flask and MySQL. Implemented bcrypt password hashing, MFA via pyotp, SQL injection protection, RBAC, and secure money transfer functionality.
+      </p>
+      <div class="project-highlight">Full auth flow: Register → Email OTP → Dashboard → Secure Transfer</div>
+      <div class="tech-chips" style="margin-bottom:1rem;">
+        <span class="chip">Python</span>
+        <span class="chip">Flask</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">bcrypt</span>
+        <span class="chip">pyotp</span>
+      </div>
+      <button onclick="document.getElementById('modal-banking').classList.add('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.1rem;background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(192,80,106,0.25);border-radius:6px;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;" onmouseover="this.style.background='rgba(192,80,106,0.2)'" onmouseout="this.style.background='var(--accent-dim)'">More Details →</button>
+    </div>
+
+  </div>
+</section>
+
+<div class="blossom-divider" aria-hidden="true"><svg width="16" height="16" viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(0)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(72)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(144)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(216)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(288)"/><circle cx="0" cy="0" r="1.4" fill="#f8c8d4"/></svg></div>
+
+<section id="awards">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Awards</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="awards-grid">
+    <div class="award-card" style="flex-direction:column;gap:1rem;">
+      <img src="assets/awards/datathon.jpg" alt="LMU Datathon Award" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);object-fit:cover;object-position:center;max-height:220px;">
+      <div style="display:flex;gap:1rem;align-items:flex-start;">
+        <div class="award-medal">3rd</div>
+        <div>
+          <div class="award-title">LMU Datathon</div>
+          <div class="award-desc">Analyzed the NLSY97 dataset to surface wage gap insights. Competed against universities across Southern California with statistical analysis and visualizations.</div>
+          <div class="award-prize">$1,000 prize · LMU</div>
+        </div>
+      </div>
+    </div>
+    <div class="award-card" style="flex-direction:column;gap:1rem;">
+      <img src="assets/awards/bootcamp.jpg" alt="LMU BEST Bootcamp Award" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);object-fit:cover;object-position:top;max-height:220px;">
+      <div style="display:flex;gap:1rem;align-items:flex-start;">
+        <div class="award-medal">3rd</div>
+        <div>
+          <div class="award-title">LMU BEST Entrepreneurship Bootcamp</div>
+          <div class="award-desc">Built an AI-powered dynamic travel itinerary app (GOTINERARY). Applied business model canvas and customer segmentation across a team of 4 competing against 7 teams.</div>
+          <div class="award-prize">$350 prize · January 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="blossom-divider" aria-hidden="true"><svg width="16" height="16" viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(0)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(72)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(144)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(216)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(288)"/><circle cx="0" cy="0" r="1.4" fill="#f8c8d4"/></svg></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <svg class="skills-branch" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M60,200 Q56,170 54,145 Q52,118 57,92" stroke="#c0506a" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M55,135 Q43,116 28,106" stroke="#c0506a" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+    <path d="M56,106 Q70,94 84,84" stroke="#c0506a" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+    <path d="M57,92 Q54,74 55,56 Q56,40 52,24" stroke="#c0506a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M55,68 Q67,60 77,54" stroke="#c0506a" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <circle cx="28" cy="106" r="5" fill="#c0506a"/><circle cx="24" cy="103" r="3" fill="#f8c8d4"/><circle cx="31" cy="103" r="3" fill="#c0506a"/><circle cx="27" cy="110" r="3" fill="#c0506a"/>
+    <circle cx="85" cy="83" r="5" fill="#c0506a"/><circle cx="81" cy="80" r="3" fill="#f8c8d4"/><circle cx="88" cy="81" r="3" fill="#c0506a"/><circle cx="86" cy="87" r="3" fill="#c0506a"/>
+    <circle cx="78" cy="53" r="4" fill="#c0506a"/><circle cx="74" cy="50" r="2.5" fill="#f8c8d4"/><circle cx="81" cy="51" r="2.5" fill="#c0506a"/>
+    <circle cx="52" cy="23" r="5.5" fill="#c0506a"/><circle cx="47" cy="20" r="3" fill="#f8c8d4"/><circle cx="55" cy="20" r="3" fill="#c0506a"/><circle cx="50" cy="27" r="3" fill="#c0506a"/><circle cx="56" cy="26" r="2.5" fill="#c0506a"/>
+  </svg>
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-label">Languages</div>
+      <div class="skill-items">
+        <span class="skill-item">Python</span>
+        <span class="skill-item">Java</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">TypeScript</span>
+        <span class="skill-item">C++</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Backend</div>
+      <div class="skill-items">
+        <span class="skill-item">Node.js</span>
+        <span class="skill-item">Express</span>
+        <span class="skill-item">Spring Boot</span>
+        <span class="skill-item">Django</span>
+        <span class="skill-item">Flask</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Databases</div>
+      <div class="skill-items">
+        <span class="skill-item">MySQL</span>
+        <span class="skill-item">PostgreSQL</span>
+        <span class="skill-item">MongoDB</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Machine Learning</div>
+      <div class="skill-items">
+        <span class="skill-item">PyTorch</span>
+        <span class="skill-item">Scikit-learn</span>
+        <span class="skill-item">NLP</span>
+        <span class="skill-item">TF-IDF</span>
+        <span class="skill-item">GAN</span>
+        <span class="skill-item">VAE</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Tools</div>
+      <div class="skill-items">
+        <span class="skill-item">Git</span>
+        <span class="skill-item">Jenkins</span>
+        <span class="skill-item">Postman</span>
+        <span class="skill-item">Selenium</span>
+        <span class="skill-item">Appium</span>
+        <span class="skill-item">Power BI</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Concepts</div>
+      <div class="skill-items">
+        <span class="skill-item">REST APIs</span>
+        <span class="skill-item">CI/CD</span>
+        <span class="skill-item">RBAC</span>
+        <span class="skill-item">Auth</span>
+        <span class="skill-item">Web Security</span>
+        <span class="skill-item">Generative AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="blossom-divider" aria-hidden="true"><svg width="16" height="16" viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(0)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(72)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(144)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(216)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(288)"/><circle cx="0" cy="0" r="1.4" fill="#f8c8d4"/></svg></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card current">
+      <div class="edu-degree">Master of Science in Computer Science</div>
+      <div class="edu-field">Focus: Machine Learning &amp; Generative AI</div>
+      <div class="edu-school">Loyola Marymount University, Los Angeles</div>
+      <div class="edu-meta">
+        <div class="edu-meta-item">2024 – <span>Dec 2026</span></div>
+        <div class="edu-meta-item">GPA <span>3.84</span></div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Engineering in Computer Engineering</div>
+      <div class="edu-field">Gujarat Technological University</div>
+      <div class="edu-school">Gujarat, India</div>
+      <div class="edu-meta">
+        <div class="edu-meta-item">2019 – <span>2023</span></div>
+        <div class="edu-meta-item">CGPA <span>7.37</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="blossom-divider" aria-hidden="true"><svg width="16" height="16" viewBox="-8 -8 16 16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(0)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(72)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(144)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(216)"/><ellipse cx="0" cy="-3.8" rx="1.8" ry="3.2" fill="#c0506a" transform="rotate(288)"/><circle cx="0" cy="0" r="1.4" fill="#f8c8d4"/></svg></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header" style="justify-content:center; text-align:center;">
+    <span class="section-num">07</span>
+    <h2>Get in Touch</h2>
+  </div>
+  <p class="contact-desc">
+    Open to Software Engineer, Backend Engineer, and ML Engineer roles. Always happy to connect.
+  </p>
+  <div class="contact-links">
+    <a href="mailto:jpanchal@lion.lmu.edu" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      jpanchal@lion.lmu.edu
+    </a>
+    <a href="https://github.com/httpjay/" target="_blank" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/jaypanchalwork/" target="_blank" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+<footer>
+  designed &amp; built by Jay A Panchal · 2025
+</footer>
+
+<!-- GRIDWATCH MODAL -->
+<div id="modal-gridwatch" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">GridWatch</div>
+        <div class="modal-subtitle">Energy Affordability Intelligence · XGBoost + SHAP + RAG + LLM · Dr. Lanyu Shang's GenAI Course · LMU</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modal-gridwatch').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-label">The Problem</div>
+        <p class="modal-text">
+          Walking around campus, I kept hearing the same thing — electricity bills were becoming a real burden. After researching, I found millions of households across the US struggle to pay energy bills every month, yet <strong>many don't know what assistance programs exist or how to access them</strong>. GridWatch was built to fix that — combining classical ML, explainable AI, and modern GenAI into a single end-to-end system.
+        </p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Landing Page — Two User Modes</div>
+        <img src="assets/gridwatch/home.png" alt="GridWatch Home" class="modal-img">
+        <div class="modal-img-caption">GridWatch serves two audiences — residents checking eligibility and city officials/researchers exploring risk data</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Resident Flow — Eligibility Check</div>
+        <div class="modal-two-col" style="margin-bottom:0.75rem;">
+          <div>
+            <img src="assets/gridwatch/eligibility.png" alt="Eligibility Form" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);">
+            <div class="modal-img-caption">Step 1 of 2 — city, household size, income range (privacy-preserving ranges, no data stored)</div>
+          </div>
+          <div>
+            <img src="assets/gridwatch/results.png" alt="Eligibility Results" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);">
+            <div class="modal-img-caption">Results show matched programs (LIHEAP, CARE, FERA, ESA) with savings estimates and direct application links</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Research Dashboard — California Energy Risk Map</div>
+        <img src="assets/gridwatch/risk_map.png" alt="California Energy Risk Map" class="modal-img">
+        <div class="modal-img-caption">50 California cities mapped by ML-predicted energy risk — 18 High Risk (red) · 34 Low Risk (green) · XGBoost trained on Census, EIA, and NOAA data</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">City Risk Dashboard — SHAP-Powered Explainability</div>
+        <img src="assets/gridwatch/dashboard.png" alt="City Risk Dashboard" class="modal-img">
+        <div class="modal-img-caption">Per-city snapshot: energy burden %, avg household income, avg energy cost, ML risk prediction, and min temperature forecast</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">AI-Generated Policy Recommendations</div>
+        <img src="assets/gridwatch/policy.png" alt="Policy Recommendations" class="modal-img">
+        <div class="modal-img-caption">RAG pipeline retrieves relevant government policy documents (LIHEAP, CARE, FERA, ESA, WAP) and generates city-specific, actionable recommendations — not generic advice</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Conversational Research Assistant</div>
+        <img src="assets/gridwatch/assistant.png" alt="Research Assistant" class="modal-img">
+        <div class="modal-img-caption">LLM-powered assistant answers policy and data questions, citing exact SHAP values and government documents it retrieved from the vector database</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">What Was Built</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;">
+          <strong>ML Pipeline:</strong> XGBoost trained on Census Bureau, EIA, and NOAA data to predict energy burden risk across 50 California cities. SHAP explainability makes model reasoning fully transparent — showing exactly which factors (income, energy cost, temperature) drive each prediction.
+        </div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;">
+          <strong>RAG Pipeline:</strong> FAISS vector database embeds real government policy documents. Retrieves the most relevant documents per query, grounding every LLM response in actual program details — no hallucinations.
+        </div>
+        <div class="modal-highlight-box">
+          <strong>Research Assistant:</strong> Conversational LLM interface that answers questions about assistance programs, cites source documents, and explains risk drivers using SHAP values in plain language.
+        </div>
+      </div>
+      <div class="modal-section" style="margin-bottom:0;">
+        <div class="modal-section-label">Tech Stack &amp; Data Sources</div>
+        <div class="tech-chips" style="margin-bottom:0.75rem;">
+          <span class="chip">Python</span><span class="chip">XGBoost</span><span class="chip">SHAP</span><span class="chip">RAG</span><span class="chip">FAISS</span><span class="chip">OpenAI API</span><span class="chip">Streamlit</span><span class="chip">Census Bureau</span><span class="chip">EIA</span><span class="chip">NOAA</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="https://httpjay-gridwatch-gridwatchappapp-ncfa7j.streamlit.app/" target="_blank" class="btn btn-primary" style="font-size:0.75rem;padding:0.5rem 1.25rem;">Try Live Demo →</a>
+      <button onclick="document.getElementById('modal-gridwatch').classList.remove('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.25rem;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:6px;cursor:pointer;letter-spacing:0.04em;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- BANKING MODAL -->
+<div id="modal-banking" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">GemVault — Secure Banking App</div>
+        <div class="modal-subtitle">Flask · MySQL · bcrypt · pyotp MFA · SQL Injection Protection · RBAC</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modal-banking').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-label">Overview</div>
+        <p class="modal-text">
+          GemVault is a full-stack secure banking web application built with <strong>Flask and MySQL</strong>, designed to demonstrate real-world web security practices. Every feature — from registration to money transfer — is hardened with industry-standard security measures including <strong>bcrypt password hashing, email-based MFA, SQL injection protection, input validation, and role-based access control</strong>.
+        </p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Login — Secure Portal</div>
+        <img src="assets/banking/login.png" alt="GemVault Login" class="modal-img">
+        <div class="modal-img-caption">GemVault login portal — credentials are validated against bcrypt-hashed passwords stored in MySQL</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Registration — Account Creation</div>
+        <img src="assets/banking/register.png" alt="GemVault Register" class="modal-img">
+        <div class="modal-img-caption">Users can register with Savings, Checking, or both account types — passwords are never stored in plaintext</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Multi-Factor Authentication (MFA)</div>
+        <div class="modal-two-col" style="margin-bottom:0.75rem;">
+          <div>
+            <img src="assets/banking/verify_otp.png" alt="Verify OTP" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);">
+            <div class="modal-img-caption">OTP verification page — 6-digit code sent to registered email on every login</div>
+          </div>
+          <div>
+            <img src="assets/banking/email_otp.png" alt="Email OTP" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);">
+            <div class="modal-img-caption">Real OTP emails delivered via pyotp — time-based codes with expiry</div>
+          </div>
+        </div>
+        <div class="modal-highlight-box">
+          <strong>How it works:</strong> After password validation, a 6-digit TOTP is generated using <strong>pyotp</strong> and emailed to the user. Login only completes after the user enters the correct OTP — protecting against stolen credentials.
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Dashboard</div>
+        <img src="assets/banking/dashboard.png" alt="GemVault Dashboard" class="modal-img">
+        <div class="modal-img-caption">Post-login dashboard showing account summary — access is role-gated, users can only see their own accounts</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Secure Money Transfer</div>
+        <img src="assets/banking/transfer.png" alt="Transfer Funds" class="modal-img">
+        <div class="modal-img-caption">Transfer funds page — all inputs are validated and parameterized to prevent SQL injection attacks</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Transfer Proof — Balance Before &amp; After</div>
+        <div class="modal-two-col">
+          <div>
+            <img src="assets/banking/before_transfer.png" alt="Before Transfer" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);">
+            <div class="modal-img-caption">Before transfer — Balance: $350</div>
+          </div>
+          <div>
+            <img src="assets/banking/after_transfer.png" alt="After Transfer" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);">
+            <div class="modal-img-caption">After transfer — Balance: $300 (–$50 transferred)</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Security Features Implemented</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;"><strong>bcrypt Password Hashing:</strong> Passwords are salted and hashed before storage — plaintext passwords are never saved in the database.</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;"><strong>Email MFA via pyotp:</strong> Time-based one-time passwords sent to the user's registered email on every login attempt.</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;"><strong>SQL Injection Protection:</strong> All database queries use parameterized statements — no raw string interpolation.</div>
+        <div class="modal-highlight-box"><strong>RBAC + Session Handling:</strong> Role-based access control ensures users can only access their own accounts and perform authorized actions.</div>
+      </div>
+      <div class="modal-section" style="margin-bottom:0;">
+        <div class="modal-section-label">Tech Stack</div>
+        <div class="tech-chips">
+          <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">MySQL</span><span class="chip">bcrypt</span><span class="chip">pyotp</span><span class="chip">RBAC</span><span class="chip">TOTP</span><span class="chip">Web Security</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button onclick="document.getElementById('modal-banking').classList.remove('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.25rem;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:6px;cursor:pointer;letter-spacing:0.04em;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAKE REVIEW MODAL -->
+<div id="modal-fakereview" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Fake Review Detector</div>
+        <div class="modal-subtitle">ML-Powered · Naive Bayes + TF-IDF · 40,000 Reviews · Live on Hugging Face</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modal-fakereview').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-label">Overview</div>
+        <p class="modal-text">
+          A machine learning web app that classifies e-commerce reviews as <strong>FAKE (computer-generated)</strong> or <strong>REAL (original)</strong>. Trained on 40,000 reviews using a <strong>Multinomial Naive Bayes</strong> classifier with <strong>TF-IDF vectorization</strong> (5,000 features). The app walks through the full NLP pipeline — input → clean → TF-IDF → classify → result — and exposes linguistic signals that indicate fake reviews.
+        </p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Live App — Input</div>
+        <img src="assets/fake-review/app_input.png" alt="Fake Review Detector Input" class="modal-img">
+        <div class="modal-img-caption">Users can paste any review text or use preset examples — Suspicious 5-star, Genuine complaint, Vague generic, Detailed honest</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Live App — Verdict</div>
+        <img src="assets/fake-review/app_result.png" alt="Fake Review Detector Result" class="modal-img">
+        <div class="modal-img-caption">The model returns a verdict (REAL/FAKE) with confidence score and class probabilities after analyzing the review</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Linguistic Signal Analysis</div>
+        <img src="assets/fake-review/app_detail.png" alt="Fake Review Analysis Detail" class="modal-img">
+        <div class="modal-img-caption">Full breakdown — text statistics, linguistic signals (excessive punctuation, all caps, vague language, extreme sentiment), and pattern matches like "amazing", "best ever", "five stars"</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">NLP Pipeline</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;"><strong>Step 1 — Clean:</strong> Lowercasing, punctuation removal, stopword filtering, tokenization.</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;"><strong>Step 2 — TF-IDF:</strong> Converts cleaned text into a 5,000-feature sparse matrix, weighting terms by frequency and inverse document frequency.</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;"><strong>Step 3 — NB Classify:</strong> Multinomial Naive Bayes computes class probabilities and returns a FAKE or REAL verdict with confidence.</div>
+        <div class="modal-highlight-box"><strong>Step 4 — Linguistic Signals:</strong> Rule-based heuristics flag excessive punctuation, all-caps words, extreme sentiment, vague language, and suspicious pattern matches as additional signals.</div>
+      </div>
+      <div class="modal-section" style="margin-bottom:0;">
+        <div class="modal-section-label">Tech Stack</div>
+        <div class="tech-chips">
+          <span class="chip">Python</span><span class="chip">Scikit-learn</span><span class="chip">Naive Bayes</span><span class="chip">TF-IDF</span><span class="chip">NLP</span><span class="chip">Hugging Face Spaces</span><span class="chip">Gradio</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="https://huggingface.co/spaces/httpjay/fake-review-detector" target="_blank" class="btn btn-primary" style="font-size:0.75rem;padding:0.5rem 1.25rem;">Try Live Demo →</a>
+      <button onclick="document.getElementById('modal-fakereview').classList.remove('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.25rem;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:6px;cursor:pointer;letter-spacing:0.04em;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ATLAS.DB MODAL -->
+<div id="modal-atlas" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">atlas.db</div>
+        <div class="modal-subtitle">PostgreSQL vs MongoDB · 622K Records · CMSI 620 — Database Systems · LMU</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modal-atlas').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-label">The Story</div>
+        <p class="modal-text">
+          Built as a class project for <strong>CMSI 620 – Database Systems</strong> with Prof. Basil Latif, this was a team effort by <strong>atlas.db (Artak, Milla, Tati, and Jay)</strong>. After a week of debating datasets, we landed on something we all live with every day — <strong>LA traffic collisions</strong>. We pulled ~622K records from the LA Open Data Portal and built two parallel database systems from raw CSVs for a fair head-to-head comparison.
+        </p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">The Dataset</div>
+        <img src="assets/atlas/dataset.png" alt="The Dataset" class="modal-img">
+        <div class="modal-img-caption">LA Traffic Collision records (2010–present) · ~622,000 rows · 20 columns · sourced from LA Open Data Portal</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">ACID vs BASE — The Core Comparison</div>
+        <img src="assets/atlas/acid_base.png" alt="ACID vs BASE Comparison" class="modal-img">
+        <div class="modal-img-caption">PostgreSQL follows the ACID model (data integrity &amp; consistency) while MongoDB follows BASE (high availability &amp; speed)</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Data Ingestion Workflow</div>
+        <img src="assets/atlas/workflow.png" alt="Data Ingestion Workflow" class="modal-img">
+        <div class="modal-img-caption">Both systems ingested the same raw CSV — PostgreSQL via normalization into 4 linked tables, MongoDB via denormalization into embedded collision documents</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Benchmark Highlights</div>
+        <div class="modal-highlight-box" style="margin-bottom:0.75rem;"><strong>Geospatial Query (Q3):</strong> MongoDB won this one — counting accidents within a 1 km radius of Beverly Hills using a 2dsphere index (0.93s). PostgreSQL used PostGIS ST_Point geography but was slower on this specific query type.</div>
+        <div class="modal-highlight-box"><strong>Analytical Queries (Q1, Q2, Q4, Q5):</strong> PostgreSQL dominated — especially JOIN-heavy queries for complex BI analytics. Query 1 ran in just <strong>1.72s on PostgreSQL vs 92.64s on MongoDB</strong>, demonstrating the cost of MongoDB's denormalized document lookups at scale.</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">The Verdict</div>
+        <img src="assets/atlas/verdict.png" alt="The Verdict" class="modal-img">
+        <div class="modal-img-caption">Final score: PostgreSQL 4 — MongoDB 1 · Won 🏆 Most Effective Presentation Delivery &amp; 🏆 Most Cohesive System Architecture</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Key Takeaway</div>
+        <p class="modal-text">
+          Database decisions don't stay in the backend — they surface immediately in <strong>analytics, dashboard refresh times, and decision-making</strong>. PostgreSQL's ACID guarantees made it reliable for complex BI workloads, while MongoDB's flexible schema excels for geospatial and document-centric use cases. The right database depends entirely on your workload.
+        </p>
+      </div>
+      <div class="modal-section" style="margin-bottom:0;">
+        <div class="modal-section-label">Tech Stack</div>
+        <div class="tech-chips">
+          <span class="chip">PostgreSQL</span><span class="chip">MongoDB Atlas</span><span class="chip">Amazon RDS</span><span class="chip">Python</span><span class="chip">psycopg2</span><span class="chip">PyMongo</span><span class="chip">PostGIS</span><span class="chip">Power BI</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="https://data.lacity.org/Public-Safety/Traffic-Collision-Data-from-2010-to-Present/d5tf-ez2w/about_data" target="_blank" class="btn btn-ghost" style="font-size:0.75rem;padding:0.5rem 1.25rem;">LA Open Data →</a>
+      <button onclick="document.getElementById('modal-atlas').classList.remove('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.25rem;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:6px;cursor:pointer;letter-spacing:0.04em;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- POKÉMON MODAL -->
+<div id="modal-pokemon" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Pokémon Generator</div>
+        <div class="modal-subtitle">VAE vs DCGAN · Generative AI · PyTorch · 300 Epochs</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modal-pokemon').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-label">Overview</div>
+        <p class="modal-text">
+          This project explores two fundamental generative modeling paradigms — <strong>Variational Autoencoders (VAE)</strong> and <strong>Deep Convolutional GANs (DCGAN)</strong> — by training both on a dataset of ~2,500 Pokémon images at 64×64 resolution. The goal was to understand the core trade-off: <strong>VAE offers stable, smooth training but blurry outputs</strong>, while <strong>DCGAN produces sharper, more realistic images but is harder to train</strong>.
+        </p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Architecture &amp; Challenges</div>
+        <div class="modal-highlight-box">
+          <strong>Mode Collapse Problem:</strong> Early GAN training suffered from mode collapse where the generator produced repetitive outputs. This was resolved using <strong>spectral normalization</strong> on discriminator weights, <strong>label smoothing</strong>, <strong>Two-Time Update Rule (TTUR)</strong> with different learning rates for generator and discriminator, and <strong>bilinear upsampling</strong> for stable resolution scaling. Training ran for <strong>300 epochs</strong> on Apple Silicon MPS backend.
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">GAN Training Loss</div>
+        <img src="assets/pokemon/gan_loss.png" alt="GAN Training Loss" class="modal-img">
+        <div class="modal-img-caption">Generator loss (blue) vs Discriminator loss (red) over 300 epochs — stable convergence achieved after spectral normalization</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">VAE Training Loss</div>
+        <img src="assets/pokemon/vae_loss.png" alt="VAE Training Loss" class="modal-img">
+        <div class="modal-img-caption">Total loss, reconstruction loss, and KL divergence over 200 epochs — train and validation curves closely track each other</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">VAE Generated Outputs — Epochs 160 to 200</div>
+        <div class="modal-img-grid">
+          <div><img src="assets/pokemon/vae_160.png" alt="VAE Epoch 160"><div class="modal-img-caption">Epoch 160</div></div>
+          <div><img src="assets/pokemon/vae_170.png" alt="VAE Epoch 170"><div class="modal-img-caption">Epoch 170</div></div>
+          <div><img src="assets/pokemon/vae_180.png" alt="VAE Epoch 180"><div class="modal-img-caption">Epoch 180</div></div>
+          <div><img src="assets/pokemon/vae_190.png" alt="VAE Epoch 190"><div class="modal-img-caption">Epoch 190</div></div>
+          <div><img src="assets/pokemon/vae_200.png" alt="VAE Epoch 200"><div class="modal-img-caption">Epoch 200</div></div>
+        </div>
+        <p class="modal-text" style="margin-top:0.5rem;">VAE outputs are <strong>smooth and structurally consistent</strong> — you can clearly see Pokémon-like silhouettes and color distributions. The blurriness is expected from the pixel-wise reconstruction loss.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">DCGAN Generated Outputs — Epochs 260 to 300</div>
+        <div class="modal-img-grid">
+          <div><img src="assets/pokemon/gan_260.png" alt="GAN Epoch 260"><div class="modal-img-caption">Epoch 260</div></div>
+          <div><img src="assets/pokemon/gan_270.png" alt="GAN Epoch 270"><div class="modal-img-caption">Epoch 270</div></div>
+          <div><img src="assets/pokemon/gan_280.png" alt="GAN Epoch 280"><div class="modal-img-caption">Epoch 280</div></div>
+          <div><img src="assets/pokemon/gan_290.png" alt="GAN Epoch 290"><div class="modal-img-caption">Epoch 290</div></div>
+          <div><img src="assets/pokemon/gan_300.png" alt="GAN Epoch 300"><div class="modal-img-caption">Epoch 300</div></div>
+        </div>
+        <p class="modal-text" style="margin-top:0.5rem;">DCGAN outputs are <strong>sharper and richer in texture and color</strong> — more vivid and detailed than VAE. However, the shapes are less structurally coherent, reflecting the adversarial training dynamic.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Key Findings</div>
+        <div class="modal-two-col">
+          <div class="modal-highlight-box"><strong>VAE — Stability</strong><br>Smooth, predictable training. KL divergence and reconstruction loss converged cleanly. Outputs are blurry but structurally meaningful. Best for latent space interpolation.</div>
+          <div class="modal-highlight-box"><strong>DCGAN — Realism</strong><br>Sharper, more vibrant outputs with richer textures. Required careful tuning to avoid mode collapse. Better for visual quality at the cost of training stability.</div>
+        </div>
+      </div>
+      <div class="modal-section" style="margin-bottom:0;">
+        <div class="modal-section-label">Tech Stack</div>
+        <div class="tech-chips">
+          <span class="chip">PyTorch</span><span class="chip">DCGAN</span><span class="chip">VAE</span><span class="chip">Deep Learning</span><span class="chip">Generative AI</span><span class="chip">Apple MPS</span><span class="chip">Spectral Normalization</span><span class="chip">TTUR</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button onclick="document.getElementById('modal-pokemon').classList.remove('open')" style="font-family:var(--mono);font-size:0.75rem;padding:0.5rem 1.25rem;background:transparent;color:var(--text2);border:1px solid var(--border2);border-radius:6px;cursor:pointer;letter-spacing:0.04em;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CANVAS HERO ANIMATION ─────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let W, H;
+  let petals = [];
+  let cranes = [];
+  let blossoms = [];
+  let frameCount = 0;
+
+  // Deterministic RNG for stable blossom positions across redraws
+  function makeRng(seed) {
+    let s = seed;
+    return function() {
+      s = (s * 9301 + 49297) % 233280;
+      return s / 233280;
+    };
+  }
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth  || window.innerWidth;
+    H = canvas.height = canvas.offsetHeight || window.innerHeight;
+    buildBlossoms();
+  }
+
+  // ── BLOSSOM DATA (pre-generated, stable) ─────────────────────────────
+  function buildBlossoms() {
+    const rng = makeRng(1337);
+    blossoms = [];
+    const clusters = [
+      { bx: W*0.225, by: H*0.420, n: 22, sp: 42 },
+      { bx: W*0.055, by: H*0.375, n: 18, sp: 34 },
+      { bx: W*0.185, by: H*0.300, n: 24, sp: 40 },
+      { bx: W*0.310, by: H*0.275, n: 16, sp: 32 },
+      { bx: W*0.155, by: H*0.218, n: 20, sp: 36 },
+    ];
+    clusters.forEach(function(c) {
+      for (var i = 0; i < c.n; i++) {
+        var rx  = 3.5 + rng() * 5;
+        var ry  = 2.5 + rng() * 3;
+        var r   = rng() * 220 | 0;
+        var g   = 140 + (rng() * 40 | 0);
+        var b   = 155 + (rng() * 40 | 0);
+        blossoms.push({
+          x:  c.bx + (rng() - 0.5) * c.sp * 2,
+          y:  c.by + (rng() - 0.5) * c.sp,
+          rx: rx, ry: ry,
+          ang: rng() * Math.PI,
+          fill: 'rgba(' + (210 + r % 30) + ',' + g + ',' + b + ',0.82)',
+          hi:   'rgba(255,' + (195 + (rng()*25|0)) + ',' + (210 + (rng()*20|0)) + ',0.75)',
+        });
+      }
+    });
+  }
+
+  // ── PETALS ────────────────────────────────────────────────────────────
+  function initPetals() {
+    petals = [];
+    for (var i = 0; i < 55; i++) {
+      petals.push({
+        x:       Math.random() * W,
+        y:       Math.random() * H,
+        sz:      3 + Math.random() * 5,
+        vy:      0.55 + Math.random() * 1.15,
+        drift:   (Math.random() - 0.5) * 0.45,
+        ang:     Math.random() * Math.PI * 2,
+        rot:     (Math.random() - 0.5) * 0.038,
+        alpha:   0.35 + Math.random() * 0.55,
+        swP:     Math.random() * Math.PI * 2,
+        swA:     0.4 + Math.random() * 0.8,
+        swF:     0.014 + Math.random() * 0.022,
+      });
+    }
+  }
+
+  // ── CRANES ────────────────────────────────────────────────────────────
+  function initCranes() {
+    cranes = [];
+    for (var i = 0; i < 8; i++) {
+      var bY = H * (0.14 + Math.random() * 0.34);
+      cranes.push({
+        x:    W + 80 + i * 210,
+        baseY: bY,
+        y:    bY,
+        spd:  0.38 + Math.random() * 0.42,
+        wP:   Math.random() * Math.PI * 2,
+        wS:   0.016 + Math.random() * 0.012,
+        sc:   0.65 + Math.random() * 0.55,
+        snP:  Math.random() * Math.PI * 2,
+        snA:  9 + Math.random() * 18,
+        snF:  0.0038 + Math.random() * 0.004,
+      });
+    }
+  }
+
+  // ── DRAW FUNCTIONS ────────────────────────────────────────────────────
+  function drawSky() {
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0,    '#f0d8e8');
+    g.addColorStop(0.40, '#fdf0f4');
+    g.addColorStop(1,    '#fce8e0');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawSun() {
+    var sx = W * 0.65, sy = H * 0.38;
+    var g = ctx.createRadialGradient(sx, sy, 0, sx, sy, H * 0.52);
+    g.addColorStop(0,    'rgba(255,222,178,0.58)');
+    g.addColorStop(0.22, 'rgba(255,202,158,0.30)');
+    g.addColorStop(0.55, 'rgba(255,182,138,0.11)');
+    g.addColorStop(1,    'rgba(255,160,120,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawHills() {
+    // Far hill
+    ctx.fillStyle = 'rgba(212,172,198,0.26)';
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+    ctx.lineTo(0, H*0.68);
+    ctx.bezierCurveTo(W*0.16, H*0.57, W*0.38, H*0.61, W*0.52, H*0.67);
+    ctx.bezierCurveTo(W*0.67, H*0.73, W*0.82, H*0.59, W, H*0.65);
+    ctx.lineTo(W, H); ctx.fill();
+
+    // Mid hill
+    ctx.fillStyle = 'rgba(188,145,170,0.37)';
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+    ctx.lineTo(0, H*0.78);
+    ctx.bezierCurveTo(W*0.11, H*0.67, W*0.29, H*0.65, W*0.44, H*0.72);
+    ctx.bezierCurveTo(W*0.60, H*0.80, W*0.77, H*0.66, W, H*0.73);
+    ctx.lineTo(W, H); ctx.fill();
+
+    // Near hill
+    ctx.fillStyle = 'rgba(155,105,132,0.47)';
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+    ctx.lineTo(0, H*0.86);
+    ctx.bezierCurveTo(W*0.11, H*0.77, W*0.23, H*0.74, W*0.35, H*0.81);
+    ctx.bezierCurveTo(W*0.47, H*0.88, W*0.57, H*0.74, W*0.67, H*0.80);
+    ctx.bezierCurveTo(W*0.76, H*0.86, W*0.89, H*0.76, W, H*0.82);
+    ctx.lineTo(W, H); ctx.fill();
+  }
+
+  function drawGround(t) {
+    var g = ctx.createLinearGradient(0, H*0.85, 0, H);
+    g.addColorStop(0, 'rgba(172,122,146,0.55)');
+    g.addColorStop(1, 'rgba(196,148,166,0.78)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, H*0.85, W, H*0.15);
+
+    ctx.lineWidth = 0.7;
+    for (var i = 0; i < 7; i++) {
+      var ry = H*0.875 + i*13 + Math.sin(t*0.032 + i*0.85)*2.8;
+      ctx.strokeStyle = 'rgba(255,222,232,' + (0.18 - i*0.018) + ')';
+      ctx.beginPath();
+      ctx.moveTo(W*0.06, ry);
+      ctx.bezierCurveTo(
+        W*0.28, ry - 2.2 + Math.sin(t*0.027+i)*1.5,
+        W*0.72, ry + 2.0 + Math.cos(t*0.031+i)*1.5,
+        W*0.94, ry
+      );
+      ctx.stroke();
+    }
+  }
+
+  function drawTree() {
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    // Trunk
+    ctx.strokeStyle = '#3d2030';
+    ctx.lineWidth = 13;
+    ctx.beginPath();
+    ctx.moveTo(W*0.0, H*1.0);
+    ctx.bezierCurveTo(W*0.032, H*0.84, W*0.072, H*0.69, W*0.118, H*0.555);
+    ctx.stroke();
+
+    // Branches [from, cp, to, lineWidth]
+    var br = [
+      [W*0.090, H*0.620, W*0.162, H*0.510, W*0.228, H*0.422, 8.5],
+      [W*0.100, H*0.590, W*0.042, H*0.478, W*0.052, H*0.378, 6.5],
+      [W*0.115, H*0.562, W*0.108, H*0.432, W*0.188, H*0.308, 5.0],
+      [W*0.212, H*0.448, W*0.262, H*0.348, W*0.312, H*0.282, 4.0],
+      [W*0.062, H*0.422, W*0.090, H*0.318, W*0.158, H*0.225, 3.0],
+    ];
+    br.forEach(function(b) {
+      ctx.strokeStyle = '#3d2030';
+      ctx.lineWidth = b[6];
+      ctx.beginPath();
+      ctx.moveTo(b[0], b[1]);
+      ctx.quadraticCurveTo(b[2], b[3], b[4], b[5]);
+      ctx.stroke();
+    });
+
+    // Blossoms
+    blossoms.forEach(function(bl) {
+      ctx.save();
+      ctx.translate(bl.x, bl.y);
+      ctx.rotate(bl.ang);
+      ctx.fillStyle = bl.fill;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, bl.rx, bl.ry, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = bl.hi;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, bl.rx*0.42, bl.ry*0.42, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+  }
+
+  function drawCrane(c) {
+    ctx.save();
+    ctx.translate(c.x, c.y);
+    ctx.scale(c.sc, c.sc);
+
+    var wFlap = Math.sin(c.wP);        // -1 … 1
+    var wTip  = wFlap * 30;            // tip Y offset
+
+    ctx.fillStyle   = 'rgba(61,32,48,0.82)';
+    ctx.strokeStyle = 'rgba(61,32,48,0.82)';
+
+    // Body
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 22, 5.5, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Left wing (faces travel direction = left)
+    ctx.beginPath();
+    ctx.moveTo(-7, -2);
+    ctx.quadraticCurveTo(-38, -20 + wTip, -66, -8 + wTip*0.6);
+    ctx.quadraticCurveTo(-38,  10 + wTip*0.3, -7, 3);
+    ctx.closePath();
+    ctx.fill();
+
+    // Right wing (trail side)
+    ctx.beginPath();
+    ctx.moveTo(7, -2);
+    ctx.quadraticCurveTo(38, -20 + wTip, 66, -8 + wTip*0.6);
+    ctx.quadraticCurveTo(38,  10 + wTip*0.3, 7, 3);
+    ctx.closePath();
+    ctx.fill();
+
+    // Neck
+    ctx.lineWidth = 3;
+    ctx.lineCap   = 'round';
+    ctx.beginPath();
+    ctx.moveTo(-19, -3);
+    ctx.quadraticCurveTo(-29, -13, -27, -25);
+    ctx.stroke();
+
+    // Head
+    ctx.beginPath();
+    ctx.ellipse(-26, -28, 5.5, 4, -0.18, 0, Math.PI*2);
+    ctx.fill();
+
+    // Beak
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(-30, -29);
+    ctx.lineTo(-40, -28.5);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function drawPetal(p) {
+    ctx.save();
+    ctx.globalAlpha = p.alpha;
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.ang);
+    ctx.fillStyle = 'rgba(232,162,185,0.92)';
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.sz, p.sz*0.58, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,215,225,0.78)';
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.sz*0.38, p.sz*0.22, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+
+  // ── ANIMATION LOOP ────────────────────────────────────────────────────
+  function animate() {
+    requestAnimationFrame(animate);
+    frameCount++;
+    var t = frameCount;
+
+    ctx.clearRect(0, 0, W, H);
+
+    drawSky();
+    drawSun();
+    drawHills();
+    drawGround(t);
+    if (W > 768) drawTree();
+
+    // Update & draw cranes (fly right → left)
+    cranes.forEach(function(c) {
+      c.x   -= c.spd;
+      c.wP  += c.wS;
+      c.y    = c.baseY + Math.sin(t * c.snF + c.snP) * c.snA;
+      if (c.x < -160) {
+        c.x     = W + 80 + Math.random() * 220;
+        c.baseY = H * (0.14 + Math.random() * 0.34);
+      }
+      drawCrane(c);
+    });
+
+    // Update & draw petals
+    petals.forEach(function(p) {
+      p.y   += p.vy;
+      p.x   += p.drift + Math.sin(t * p.swF + p.swP) * p.swA;
+      p.ang += p.rot;
+      if (p.y > H + 20)        { p.y = -10; p.x = Math.random() * W; }
+      if (p.x > W + 20)          p.x = -10;
+      if (p.x < -20)             p.x = W + 10;
+      drawPetal(p);
+    });
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────────
+  resize();
+  initPetals();
+  initCranes();
+  window.addEventListener('resize', function() {
+    resize();
+    initPetals();
+    initCranes();
+  });
+  animate();
+})();
+
+// ── SCROLL REVEAL — staggered per section ────────────────────────────────
+(function() {
+  var CARD = '.project-card, .stat-card, .skill-group, .award-card, .edu-card, .timeline-item';
+
+  // Set initial hidden state for all reveal targets
+  document.querySelectorAll(CARD).forEach(function(el) {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+  });
+  document.querySelectorAll('.skill-item').forEach(function(el) {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(6px)';
+    el.style.transition = 'opacity 0.45s ease-out, transform 0.45s ease-out';
+  });
+
+  var secObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var cards = Array.from(entry.target.querySelectorAll(CARD));
+      cards.forEach(function(card, i) {
+        setTimeout(function() {
+          card.style.opacity   = '1';
+          card.style.transform = 'translateY(0)';
+          // Stagger skill-items within each card
+          Array.from(card.querySelectorAll('.skill-item')).forEach(function(tag, j) {
+            setTimeout(function() {
+              tag.style.opacity   = '1';
+              tag.style.transform = 'translateY(0)';
+            }, j * 40);
+          });
+        }, i * 80);
+      });
+      secObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('#about, #experience, #projects, #awards, #skills, #education, #contact')
+    .forEach(function(s) { secObserver.observe(s); });
+})();
+
+// ── BACKGROUND PETAL CANVAS ───────────────────────────────────────────────
+(function() {
+  var cv   = document.getElementById('bg-petals');
+  var ctx  = cv.getContext('2d');
+  var W, H, pts = [], frame = 0, paused = false;
+
+  function resize() {
+    W = cv.width  = window.innerWidth;
+    H = cv.height = window.innerHeight;
+  }
+
+  function init() {
+    pts = [];
+    for (var i = 0; i < 22; i++) {
+      pts.push({
+        x:   Math.random() * W,
+        y:   Math.random() * H,
+        sz:  2.5 + Math.random() * 4.5,
+        vy:  0.2 + Math.random() * 0.25,
+        dx:  (Math.random() - 0.5) * 0.22,
+        ang: Math.random() * Math.PI * 2,
+        rot: (Math.random() - 0.5) * 0.018,
+        al:  0.07 + Math.random() * 0.20,
+        sp:  Math.random() * Math.PI * 2,
+        sa:  0.22 + Math.random() * 0.45,
+        sf:  0.007 + Math.random() * 0.011,
+      });
+    }
+  }
+
+  function tick() {
+    requestAnimationFrame(tick);
+    if (paused) return;
+    frame++;
+    ctx.clearRect(0, 0, W, H);
+    pts.forEach(function(p) {
+      p.y   += p.vy;
+      p.x   += p.dx + Math.sin(frame * p.sf + p.sp) * p.sa;
+      p.ang += p.rot;
+      if (p.y > H + 12)  { p.y = -8;  p.x = Math.random() * W; }
+      if (p.x > W + 12)    p.x = -8;
+      if (p.x < -12)       p.x = W + 8;
+      ctx.save();
+      ctx.globalAlpha = p.al;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.ang);
+      ctx.fillStyle = 'rgba(248,200,212,0.92)';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.sz, p.sz * 0.6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,230,238,0.75)';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.sz * 0.38, p.sz * 0.24, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  resize();
+  init();
+  tick();
+  window.addEventListener('resize', function() { resize(); init(); });
+  document.addEventListener('visibilitychange', function() { paused = document.hidden; });
+})();
+
+// ── HOVER PETALS on project cards ─────────────────────────────────────────
+document.querySelectorAll('.project-card').forEach(function(card) {
+  card.addEventListener('mouseenter', function() {
+    var p = document.createElement('span');
+    p.className = 'hover-petal';
+    p.style.bottom = (8  + Math.random() * 24) + 'px';
+    p.style.left   = (12 + Math.random() * 72) + '%';
+    card.appendChild(p);
+    p.addEventListener('animationend', function() { p.remove(); });
+  });
+});
+</script>
+</body>
+</html>
