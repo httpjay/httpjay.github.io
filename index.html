@@ -701,9 +701,35 @@
     padding: 1.75rem;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
     transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   }
   .edu-card:hover { transform: translateY(-3px); border-color: var(--border2); background: var(--surface2); }
+
+  .edu-logo-wrap {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background: #fbf6f4;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .edu-logo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .edu-card-body { flex: 1 1 auto; min-width: 0; }
 
   .edu-card.current { border-color: rgba(192,80,106,0.35); }
 
@@ -1033,6 +1059,8 @@
     .hero-tags { gap: 0.36rem; }
     .nav-links a { font-size: 0.7rem; }
     .btn { font-size: 0.8rem; }
+    .edu-card { flex-direction: column; }
+    .edu-logo-wrap { margin-bottom: 0.15rem; }
   }
 </style>
 </head>
@@ -1470,21 +1498,31 @@
   </div>
   <div class="edu-grid">
     <div class="edu-card current">
-      <div class="edu-degree">Master of Science in Computer Science</div>
-      <div class="edu-field">Focus: Machine Learning &amp; Generative AI</div>
-      <div class="edu-school">Loyola Marymount University, Los Angeles</div>
-      <div class="edu-meta">
-        <div class="edu-meta-item">2024 – <span>Dec 2026</span></div>
-        <div class="edu-meta-item">GPA <span>3.88</span></div>
+      <div class="edu-logo-wrap">
+        <img src="assets/logos/LMU_logo_1.png" alt="Loyola Marymount University seal" width="60" height="60" loading="lazy">
+      </div>
+      <div class="edu-card-body">
+        <div class="edu-degree">Master of Science in Computer Science</div>
+        <div class="edu-field">Focus: Machine Learning &amp; Generative AI</div>
+        <div class="edu-school">Loyola Marymount University, Los Angeles</div>
+        <div class="edu-meta">
+          <div class="edu-meta-item">2024 – <span>Dec 2026</span></div>
+          <div class="edu-meta-item">GPA <span>3.88</span></div>
+        </div>
       </div>
     </div>
     <div class="edu-card">
-      <div class="edu-degree">Bachelor of Engineering in Computer Engineering</div>
-      <div class="edu-field">Gujarat Technological University</div>
-      <div class="edu-school">Gujarat, India</div>
-      <div class="edu-meta">
-        <div class="edu-meta-item">2019 – <span>2023</span></div>
-        <div class="edu-meta-item">CGPA <span>7.37</span></div>
+      <div class="edu-logo-wrap">
+        <img src="assets/logos/GTU_logo.jpeg" alt="Gujarat Technological University logo" width="60" height="60" loading="lazy">
+      </div>
+      <div class="edu-card-body">
+        <div class="edu-degree">Bachelor of Engineering in Computer Engineering</div>
+        <div class="edu-field">Gujarat Technological University</div>
+        <div class="edu-school">Gujarat, India</div>
+        <div class="edu-meta">
+          <div class="edu-meta-item">2019 – <span>2023</span></div>
+          <div class="edu-meta-item">CGPA <span>7.37</span></div>
+        </div>
       </div>
     </div>
   </div>
