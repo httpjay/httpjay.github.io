@@ -710,8 +710,8 @@
 
   .edu-logo-wrap {
     flex-shrink: 0;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -727,7 +727,13 @@
     height: 100%;
     object-fit: contain;
     display: block;
+    
   }
+
+  /* GTU source file has more baked-in white margin around the crest than
+     the LMU seal, so it renders visibly smaller inside the same-size
+     plate; scale it up to match LMU's perceived fill. */
+  .edu-logo-wrap img.edu-logo--zoom { transform: scale(1.30); }
 
   .edu-card-body { flex: 1 1 auto; min-width: 0; }
 
@@ -754,7 +760,8 @@
   }
 
   .edu-degree { font-family: var(--display); font-size: 1.34rem; font-weight: 400; color: var(--text); margin-bottom: 0.35rem; line-height: 1.22; }
-  .edu-field  { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; }
+  .edu-field  { font-family: var(--sans); font-size: 0.8rem; font-weight: 400; color: var(--accent); margin-bottom: 0.8rem; }
+  .edu-university { font-family: var(--sans); font-size: 1.02rem; font-weight: 700; color: gold; margin-bottom: 0.5rem; line-height: 1.5; }
   .edu-school { font-size: 0.94rem; color: var(--text2); margin-bottom: 0.5rem; line-height: 1.65; }
 
   .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -785,6 +792,20 @@
     letter-spacing: 0.01em;
   }
   .contact-link:hover { color: var(--accent2); border-color: var(--accent); transform: translateY(-2px); background: var(--surface2); }
+
+  .contact-sticker {
+    display: block;
+    width: 140px;
+    height: auto;
+    margin: 3rem auto 0;
+    transform: rotate(-5deg);
+    filter: drop-shadow(0 14px 26px rgba(0,0,0,0.35)) drop-shadow(0 0 20px rgba(216,95,130,0.22));
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  .contact-sticker:hover {
+    transform: rotate(-1deg) scale(1.06);
+    filter: drop-shadow(0 18px 32px rgba(0,0,0,0.4)) drop-shadow(0 0 26px rgba(216,95,130,0.30));
+  }
 
   /* ── FOOTER ── */
   footer {
@@ -1060,7 +1081,8 @@
     .nav-links a { font-size: 0.7rem; }
     .btn { font-size: 0.8rem; }
     .edu-card { flex-direction: column; }
-    .edu-logo-wrap { margin-bottom: 0.15rem; }
+    .edu-logo-wrap { margin-bottom: 0.10rem; }
+    .contact-sticker { width: 108px; margin-top: 2.25rem; }
   }
 </style>
 </head>
@@ -1499,12 +1521,12 @@
   <div class="edu-grid">
     <div class="edu-card current">
       <div class="edu-logo-wrap">
-        <img src="assets/logos/LMU_logo_1.png" alt="Loyola Marymount University seal" width="60" height="60" loading="lazy">
+        <img class="edu-logo--zoom" src="assets/logos/LMU_logo_1.png" alt="Loyola Marymount University seal" width="60" height="60" loading="lazy">
       </div>
       <div class="edu-card-body">
         <div class="edu-degree">Master of Science in Computer Science</div>
-        <div class="edu-field">Focus: Machine Learning &amp; Generative AI</div>
-        <div class="edu-school">Loyola Marymount University, Los Angeles</div>
+        <div class="edu-university">Loyola Marymount University</div>
+        <div class="edu-school">Los Angeles, CA, USA</div>
         <div class="edu-meta">
           <div class="edu-meta-item">2024 – <span>Dec 2026</span></div>
           <div class="edu-meta-item">GPA <span>3.88</span></div>
@@ -1513,12 +1535,12 @@
     </div>
     <div class="edu-card">
       <div class="edu-logo-wrap">
-        <img src="assets/logos/GTU_logo.jpeg" alt="Gujarat Technological University logo" width="60" height="60" loading="lazy">
+        <img class="edu-logo--zoom" src="assets/logos/GTU_logo.jpeg" alt="Gujarat Technological University logo" width="60" height="60" loading="lazy">
       </div>
       <div class="edu-card-body">
         <div class="edu-degree">Bachelor of Engineering in Computer Engineering</div>
-        <div class="edu-field">Gujarat Technological University</div>
-        <div class="edu-school">Gujarat, India</div>
+        <div class="edu-university">Gujarat Technological University</div>
+        <div class="edu-school">Ahmedabad, Gujarat, India</div>
         <div class="edu-meta">
           <div class="edu-meta-item">2019 – <span>2023</span></div>
           <div class="edu-meta-item">CGPA <span>7.37</span></div>
@@ -1556,7 +1578,7 @@
 </section>
 
 <footer>
-  designed &amp; built by Jay A Panchal · 2025
+  designed &amp; built by Jay A Panchal · 2026
 </footer>
 
 <!-- GRIDWATCH MODAL -->
