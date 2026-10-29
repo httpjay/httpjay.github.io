@@ -1,0 +1,95 @@
+/* Ocean Breeze — color tokens for httpjay.github.io
+   Light mode is the default. Dark mode follows the visitor's system setting.
+   All text colors pass WCAG AA (4.5:1) on their backgrounds. */
+
+:root {
+  /* Backgrounds */
+  --bg: #F8F7F3;              /* page background (Seashell) */
+  --bg-muted: #F1EEE6;        /* alternate section background */
+  --surface: #FFFFFF;         /* cards */
+  --surface-elevated: #FDFCF9;/* popovers, menus */
+  --surface-dark: #0B2A3A;    /* dark bands, footer */
+
+  /* Text */
+  --text: #0F172A;            /* headings and body */
+  --text-secondary: #475569;  /* descriptions */
+  --text-muted: #5A6A7E;      /* dates, captions, labels */
+  --text-inverse: #F8F7F3;    /* text on dark surfaces */
+  --link: #0F5D73;            /* links */
+
+  /* Brand and actions */
+  --primary: #0F5D73;         /* main buttons (Ocean) */
+  --primary-hover: #0B4A5A;
+  --on-primary: #FFFFFF;      /* text on primary buttons */
+  --accent: #FF7E67;          /* Coral: fills, dots, highlights only. Never for text on light backgrounds */
+  --accent-hover: #FF6B52;
+  --accent-text: #B4432E;     /* coral-colored text that stays readable */
+  --focus-ring: #0F5D73;
+
+  /* Supporting colors */
+  --sand: #E8DCC6;
+  --seafoam: #4DB6AC;
+  --tag-bg: #D7EFEC;
+  --tag-text: #0B4A5A;
+
+  /* Borders */
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+  --divider: #E5E7EB;
+  --border-muted: #D1D5DB;
+
+  /* Status */
+  --success: #10B981;  --success-bg: #D1FAE5;
+  --warning: #F59E0B;  --warning-bg: #FEF3C7;
+  --error: #EF4444;    --error-bg: #FEE2E2;
+
+  /* Charts */
+  --chart-1: #0F5D73;
+  --chart-2: #14B8A6;
+  --chart-3: #60A5FA;
+  --chart-4: #F97316;
+  --chart-5: #FBBF24;
+  --chart-grid: #E5E7EB;
+
+  /* Fonts */
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* Pages with <html data-theme="light"> stay light even when the system is dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B2A3A;            /* Deep navy */
+    --bg-muted: #0E3142;
+    --surface: #12374A;
+    --surface-elevated: #17415A;
+    --surface-dark: #071D28;
+
+    --text: #F8F7F3;
+    --text-secondary: #B8C4CC;
+    --text-muted: #93A3AE;
+    --text-inverse: #0B2A3A;
+    --link: #4DB6AC;          /* Seafoam */
+
+    --primary: #4DB6AC;
+    --primary-hover: #66C6BD;
+    --on-primary: #0B2A3A;
+    --accent: #FF8A65;        /* Coral, readable on dark */
+    --accent-hover: #FF9E7F;
+    --accent-text: #FF8A65;
+    --focus-ring: #4DB6AC;
+
+    --sand: #D6C6A5;
+    --seafoam: #4DB6AC;
+    --tag-bg: #1D4A5C;
+    --tag-text: #CFEFEA;
+
+    --border: #2A3B4C;
+    --border-strong: #3A5063;
+    --divider: #22384A;
+    --border-muted: #2E4456;
+
+    --chart-grid: #22384A;
+  }
+}
