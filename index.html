@@ -66,6 +66,7 @@
     font-family: var(--font-mono);
     font-size: 13px;
     line-height: 20px;
+    font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -368,10 +369,24 @@
   .edu .eyebrow { margin-bottom: 20px; }
   .edu-list { border-top: 1px solid var(--border); }
   .edu-row {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
     padding: 28px 0;
     border-bottom: 1px solid var(--border);
   }
+  .edu-main { display: flex; align-items: center; gap: 20px; min-width: 0; }
+  .edu-logo {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    width: 64px; height: 64px;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .edu-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  /* GTU's file has more white margin around the crest, so scale it to match the LMU seal. */
+  .edu-logo img[data-zoom] { transform: scale(1.25); }
   .edu-degree {
     font-family: var(--font-display);
     font-size: 24px;
@@ -588,7 +603,10 @@
     .exp-dates { line-height: 22px; }
     .exp-role { font-size: 22px; line-height: 30px; }
     .edu { margin-top: 64px; }
-    .edu-row { flex-direction: column; gap: 8px; }
+    .edu-row { flex-direction: column; align-items: stretch; gap: 8px; }
+    .edu-main { align-items: flex-start; gap: 16px; }
+    .edu-logo { width: 48px; height: 48px; padding: 4px; }
+    .edu-meta { padding-left: 64px; } /* lines up under the degree text: 48px logo + 16px gap */
     .edu-degree { font-size: 22px; line-height: 30px; }
     .contact { padding-bottom: 40px; }
     .site-footer { margin-top: 72px; }
@@ -841,16 +859,22 @@
         <h3 class="eyebrow">Education</h3>
         <ul class="edu-list">
           <li class="edu-row">
-            <div>
-              <p class="edu-degree">MS Computer Science</p>
-              <p class="edu-school"><strong>Loyola Marymount University</strong> · Los Angeles, CA, USA</p>
+            <div class="edu-main">
+              <span class="edu-logo"><img src="assets/logos/LMU_logo_1.png" alt="Loyola Marymount University seal" width="64" height="64" loading="lazy"></span>
+              <div>
+                <p class="edu-degree">MS Computer Science</p>
+                <p class="edu-school"><strong>Loyola Marymount University</strong> · Los Angeles, CA, USA</p>
+              </div>
             </div>
             <p class="edu-meta">2024 – Dec 2026 · GPA 3.88</p>
           </li>
           <li class="edu-row">
-            <div>
-              <p class="edu-degree">BE Computer Engineering</p>
-              <p class="edu-school"><strong>Gujarat Technological University</strong> · Ahmedabad, Gujarat, India</p>
+            <div class="edu-main">
+              <span class="edu-logo"><img src="assets/logos/GTU_logo.jpeg" alt="Gujarat Technological University logo" width="64" height="64" loading="lazy" data-zoom></span>
+              <div>
+                <p class="edu-degree">BE Computer Engineering</p>
+                <p class="edu-school"><strong>Gujarat Technological University</strong> · Ahmedabad, Gujarat, India</p>
+              </div>
             </div>
             <p class="edu-meta">2019 – 2023</p>
           </li>
